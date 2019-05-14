@@ -1,0 +1,119 @@
+<odoo>
+  <data>
+    <record id="hr_list_tree" model="ir.ui.view">
+      <field name="name">Hr_List_Tree</field>
+      <field name="model">hr.applicant</field>
+      <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job"/>
+      <field name="arch" type="xml">
+        <field name="partner_phone" position="replace">
+          <field name="partner_phone" invisible="1"/>
+        </field>
+      
+
+        <field name="partner_id" position="replace">
+          <field name="partner_id" invisible="1"/>
+          <!-- <field name ="test"/> -->
+        </field>
+        <xpath expr="//form/sheet/div/button" position="after">
+         
+                    <button name="daily_report_employee" class="oe_stat_button" icon="fa-file" type="object" help="Schedule interview with this applicant">
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_text">Daily report</span>
+                         </div>
+                    </button>
+                  
+                </xpath>
+
+        <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+        
+
+      </field>
+       <!-- <div class="oe_button_box" name="button_box">
+                    <button name="" class="oe_stat_button" icon="fa-calendar" type="object" help="Schedule interview with this applicant">
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_text">Daily report</span>
+                         </div>
+                    </button>
+                  </div> -->
+
+    </record>
+
+    <record id="hr_department_tree" model="ir.ui.view">
+      <field name="name">HR Department tree</field>
+      <field name="model">hr.department</field>
+      <field name="inherit_id" ref="hr.view_department_form"/>
+      <field name="arch" type="xml">
+        <!-- <field name="parent_id" position="replace">
+          <field name="parent_id" invisible="1"/>
+        </field>
+         <field name="manager_id" position="replace">
+          <field name="manager_id"  invisible="1"/>
+        </field> -->
+        <xpath  expr="/form" position="replace">
+          <form>
+            <sheet>
+              <group>
+                <group>
+                   <field name="name"/>
+                </group>
+              
+              </group>
+            </sheet>
+            
+          </form>
+         <!--  <button invisible="1"/> -->
+          <!-- <group>
+            <field name="name" />
+          </group> -->
+        </xpath>
+        </field>
+        
+
+    </record>
+<record id="daily_report_tree" model="ir.ui.view">
+  <field name="name">Daily_Report_Tree</field>
+  <field name="model">hr.daily_report</field>
+  <field name="arch" type="xml">
+    <form>
+      <sheet>
+        <group>
+          <group>
+            <field name="name"/>
+            <field name="Manager_name"/>
+
+          </group>
+          <group>
+            <field name="date"/>
+          </group>
+        </group>
+        <notebook>
+          <page string="Task-Details">
+            <separator string="Report"/>
+            <field name="task">
+            <tree editable="bottom">
+              <field name="task_no"/>
+               <field name="planned_date"/>
+                <field name="estimated_date"/>
+                 <field name="des"/>
+                 <field name="status"/>
+            </tree>
+          </field>
+          </page>
+        </notebook>
+      </sheet>
+    </form>
+  </field>
+</record>
+<record id="daily_action_view" model="ir.actions.act_window">
+  <field name="name">Daily Action View</field>
+  <field name="res_model">hr.daily_report</field>
+  <field name="view_mode">tree,form</field>
+  </record>
+
+
+
+  </data>
+</odoo>

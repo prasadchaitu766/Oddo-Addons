@@ -1,0 +1,131 @@
+<odoo>
+	<data>
+
+
+<record id="registration_view_tree" model="ir.ui.view">
+	<field name="name">Registaration-View-Tree</field>
+	<field name="model">hr.registration</field>
+	<field name="arch" type="xml">
+		<tree>
+			<field name="name"/>
+			<field name="contact"/>
+			<field name="email"/>
+		</tree>
+	</field>
+</record>
+<record id="registration_view_form" model="ir.ui.view">
+	<field name="name">Registaration-View-Form</field>
+	<field name="model">hr.registration</field>
+	<!-- <field name="src_model">hr.transfer</field> -->
+	<field name="arch" type="xml">
+		<form>
+			<header>
+				<button name="transfer_information" string="Transfer" type="object"/>
+			</header>
+			
+			<sheet>
+				<group>
+					<group>
+						<field name="name"/>
+						<field name="contact"/>
+						<field name="email"/>
+
+					</group>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record id="registration_view_action" model="ir.actions.act_window">
+
+	<field name="name">Registration-View-Action</field>
+	<field name="res_model">hr.registration</field>
+	<field name="view_mode">tree,form</field>
+	</record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<record id="transfer_view_form" model="ir.ui.view">
+	<field name="name">Transfer-View-Form</field>
+	<field name="model">hr.transfer</field>
+
+
+	<field name="arch" type="xml">
+		<tree>
+	<field name="name"/>
+	<field name="contact"/>
+	<field name="email"/>
+		</tree>
+	
+		
+	</field>
+</record>
+
+
+<record id="transfer_view_form111" model="ir.ui.view">
+	<field name="name">Transfer-View-Form</field>
+	<field name="model">hr.transfer</field>
+	
+	<field name="arch" type="xml">
+		<form>
+			<header>
+				<button name="get_data" string="Edit" type="object"/>
+			</header>
+			
+			<sheet>
+				<group>
+					<group>
+						<field name="name"/>
+						<field name="contact"/>
+						<field name="email"/>
+
+					</group>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+
+
+<record id="transfer_view_action" model="ir.actions.act_window">
+
+	<field name="name">transfer-View-Action</field>
+	<field name="res_model">hr.transfer</field>
+	<field name="view_mode">tree,form</field>
+	</record>
+
+
+
+
+	<menuitem 
+		id="registration1" 
+		name="Sample"
+		parent="hr.menu_hr_root"
+		action="registration_view_action"
+		/>
+		<menuitem 
+		id="registration12" 
+		name="Sample2"
+		parent="hr.menu_hr_root"
+		action="transfer_view_action"
+		/>
+
+	</data>
+</odoo>
