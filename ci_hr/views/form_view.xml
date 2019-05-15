@@ -29,7 +29,14 @@
 						<field name="name"/>
 						<field name="contact"/>
 						<field name="email"/>
+						<field name="address"/>
 
+					</group>
+						<group>
+							<field name="same"/>
+						</group>
+					<group>
+						<field name="address2"/>
 					</group>
 				</group>
 			</sheet>
@@ -111,6 +118,78 @@
 	<field name="view_mode">tree,form</field>
 	</record>
 
+<!-- for status bar of De-Activated-Employee -->
+<record id="de_activated_employee111" model="ir.ui.view">
+            <field name="name">De-Activated-Employee111</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//form/sheet" position="before">
+            		<header>
+            			<button name="terminate_employee" type="object" string="Terminate"/>
+            			<field name="state" readonly="1" statusbar_visible="draft,terminate,resign,cancel" widget="statusbar"/>
+            		</header>
+
+            		
+            			
+            			
+
+
+            		
+            	</xpath>
+            	
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="employee_terminated">
+            <field name="name">employee-terminated</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'terminate')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Approved Resignation
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="activated_employee">
+            <field name="name">Activated_Employee</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <!--  <field name="domain">[('state', '=', 'draft')]</field> -->
+           <field name="domain">[('state','in', ('draft','resigned'))]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Approved Resignation
+                </p>
+            </field>
+        </record>
+
+
+        <!-- <menuitem id="employee_resignation_approved" parent="ci_hr.hr_approve_menu_main" name="De-Active-Employee"
+                  action="de_activated_employee"/> -->
+   
+
+
+
+
+
+
+
+
+
+
+	<!-- <menuitem 
+		id="registration4" 
+		name="Active-Employee"
+		parent="hr.menu_hr_root"
+		action="activated_employee"
+		sequence="76"/>
+		/> -->
+		
+
 
 
 
@@ -119,13 +198,57 @@
 		name="Sample"
 		parent="hr.menu_hr_root"
 		action="registration_view_action"
+		sequence="77"/>
 		/>
 		<menuitem 
 		id="registration12" 
 		name="Sample2"
 		parent="hr.menu_hr_root"
 		action="transfer_view_action"
+		sequence="78"/>
 		/>
+		<menuitem
+            id="hr.menu_hr_root"
+            name="HR"           
+            sequence="20"
+            />
+
+        <menuitem
+            name="Recruitment-Process"
+            id="hr_recruitment.menu_hr_recruitment_root"
+            parent="hr.menu_hr_root"
+            sequence="0"
+            />
+
+            <menuitem 
+            	id="hr_menu_list"
+            	name="Employee-Info"
+            	parent="hr.menu_hr_root"
+            	sequence="1"/>
+            <menuitem 
+		id="registration4" 
+		name="Active-Employee"
+		parent="hr_menu_list"
+		action="activated_employee"
+		sequence="2"/>
+		/>
+		<menuitem 
+		id="registration55" 
+		name="De-Active-Employee"
+		parent="hr_menu_list"
+		action="employee_terminated"
+		sequence="3"/>
+		/>
+
+
+            
+
+
+
+             
+         	
+
+
 
 	</data>
 </odoo>

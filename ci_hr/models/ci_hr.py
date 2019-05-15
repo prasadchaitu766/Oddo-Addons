@@ -6,8 +6,13 @@ from odoo import models, fields, api, _
 class hr_recruitment_test_inheritence(models.Model):
 	_inherit = "hr.applicant"
 
+
+	date=fields.Date(string="Interview-Date")
+	interviewr_name=fields.Char(string="Interviewer_name")
+
 	@api.multi
 	def daily_report_employee(self):
+		
 		
 
 		return{
@@ -18,6 +23,27 @@ class hr_recruitment_test_inheritence(models.Model):
 		'domain':[('name','=',self.name)],	
 			
 		}
+
+	@api.onchange('job_id')
+	def onchange_job_id(self):
+		if self.job_id:
+			self.name = 'Application for the post of '+str(self.job_id.name)
+			
+	def _onchange_stage_id_internal(self, stage_id):
+		if self.stage_id.name != False and self.last_stage_id.name != False:
+			template = self.env.ref('ci_hr.example_email_template')
+			self.env['mail.template'].browse(template.id).send_mail(self.id, force_send=True)
+			print "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
+		
+		if not stage_id:
+			return {'value': {}}
+		stage = self.env['hr.recruitment.stage'].browse(stage_id)
+		if stage.fold:
+			return {'value': {'date_closed': fields.datetime.now()}}
+		return {'value': {'date_closed': False}}
+
+
+
 
 
 class Daily_Report(models.Model):

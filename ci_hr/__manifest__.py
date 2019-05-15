@@ -28,6 +28,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/form_view.xml',
+        'views/template.xml',
        
     ],
     # only loaded in demonstration mode
