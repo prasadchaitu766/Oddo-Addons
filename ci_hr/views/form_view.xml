@@ -121,13 +121,17 @@
 <!-- for status bar of De-Activated-Employee -->
 <record id="de_activated_employee111" model="ir.ui.view">
             <field name="name">De-Activated-Employee111</field>
-            <field name="model">hr.employee</field>
-            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job"/>
             <field name="arch" type="xml">
             	<xpath expr="//form/sheet" position="before">
             		<header>
-            			<button name="terminate_employee" type="object" string="Terminate"/>
+            			
+            			<button name="terminate_employee" type="object" string="Terminate" attrs="{'invisible': [('state','in',('employee','draft','terminated'))]}"/>
+            			<button name="employee_resign" type="object" string="Resign" attrs="{'invisible':['|',('state','=','resign'),('state','=','terminate'),('state','=','draft')]}"/>
+
             			<field name="state" readonly="1" statusbar_visible="draft,terminate,resign,cancel" widget="statusbar"/>
+
             		</header>
 
             		
@@ -142,9 +146,25 @@
         </record>
 
 
+        
+
+        <record model="ir.actions.act_window" id="activated_employee">
+            <field name="name">Activated_Employee</field>
+            <field name="res_model">hr.applicant</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <!--  <field name="domain">[('state', '=', 'draft')]</field> -->
+           <field name="domain">[('state', '=', 'employee')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Approved Resignation
+                </p>
+            </field>
+        </record>
+
+
         <record model="ir.actions.act_window" id="employee_terminated">
             <field name="name">employee-terminated</field>
-            <field name="res_model">hr.employee</field>
+            <field name="res_model">hr.applicant</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('state', '=', 'terminate')]</field>
@@ -154,22 +174,9 @@
             </field>
         </record>
 
-        <record model="ir.actions.act_window" id="activated_employee">
-            <field name="name">Activated_Employee</field>
-            <field name="res_model">hr.employee</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-           <!--  <field name="domain">[('state', '=', 'draft')]</field> -->
-           <field name="domain">[('state','in', ('draft','resigned'))]</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Approved Resignation
-                </p>
-            </field>
-        </record>
 
-
-        <!-- <menuitem id="employee_resignation_approved" parent="ci_hr.hr_approve_menu_main" name="De-Active-Employee"
-                  action="de_activated_employee"/> -->
+       <!--  <menuitem id="employee_resignation_approved" parent="ci_hr.hr_approve_menu_main" name="De-Active-Employee"
+                  action="employee_terminated"/> -->
    
 
 

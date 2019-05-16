@@ -68,15 +68,32 @@ class transfer_date(models.Model):
 		}
 		
 		# }
-class de_activated_employee(models.Model):
-	_inherit = "hr.employee"
 
-	state = fields.Selection([('draft', 'Draft'), ('terminate', 'Terminate'), ('cancel', 'Cancel'),('resign','Resign')],default="draft")
 
+	
+
+	
+
+class Hr_Applicant_inherited(models.Model):
+	_inherit = "hr.applicant"
+
+	state = fields.Selection([('employee','Employee'),('resign','Resign'),('refuse','Refuse'),('draft','Draft'),('terminate', 'Terminate')],default="draft")
+
+	@api.multi
+	def employee_creation(self):
+		self.write({'state':'employee'})
+
+	@api.multi
+	def employee_refue(self):
+		self.write({'state':'refuse'})
 	@api.multi
 	def terminate_employee(self):
 		self.write({'state':"terminate"})
-		
+	@api.multi
+	def employee_resign(self):
+		self.write({'state':'resign'})
+
+
 
 
 
