@@ -5,6 +5,7 @@ from odoo import models, fields, api, _
 
 class hr_recruitment_test_inheritence(models.Model):
 	_inherit = "hr.applicant"
+	# _rec_name =""
 
 
 	date=fields.Date(string="Interview-Date")
