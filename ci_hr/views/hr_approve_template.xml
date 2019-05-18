@@ -23,7 +23,7 @@
         <record id="test_email_send" model="mail.template">
             <field name="name">Resignation Request Mail</field>
             <field name="email_from">${}</field>
-            <field name="email_to">${object.name.email_from|safe}</field>
+            <field name="email_to">${object.email_from | safe}</field>
             <field name="subject">Resignation Request Submitted</field>
             <field name="auto_delete" eval="False"/>
             <field name="built_in" eval="True"/>

@@ -20,7 +20,7 @@
 				<form>
 					<header>
 						<button name="confirm_resign" type="object" string="Confirm" attrs="{'invisible':[('state','in',('confirm','hr-approve','ceo_approve','employee-closed'))]}"/>
-						<button name="ceo_state_method" type="object" string="Send To CEO" states="confirm"/>
+						<button name="approve_resign" type="object" string="Send To CEO" states="confirm" attrs="{'invisible':[('state','in',('confirm','draft','ceo_approve','employee-closed','hr-approve'))]}"/>
 
 						<button name="reject_resign" type="object" string="Reject" states="confirm" attrs="{'invisible':[('state','in',('confirm','hr-approve','ceo_approve','employee-closed','draft'))]}" />
 
@@ -37,6 +37,7 @@
 						<group>
 							<group>
 								<field name="name"/>
+								<field name="employee_id" domain="[('state','=','draft')]"/>
 								<field name="department"/>
 
 							</group>
@@ -118,6 +119,15 @@
 		parent="hr_approvals"
 		action="ceo_confirmation"
 		sequence="3"/>
+
+
+		<record id="seq_bi_employee" model="ir.sequence">
+			<field name="name">Employee</field>
+			<field name="code">bi.employee.salary</field>
+			<field name="prefix">ADV</field>
+			<field name="padding">5</field>
+			<field name="company_id" eval="False"/>
+		</record>
 		
             
 

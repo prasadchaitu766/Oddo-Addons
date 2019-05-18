@@ -37,6 +37,7 @@ class hr_recruitment_test_inheritence(models.Model):
 		# print self.last_stage_id.name,"111111111111111111111111111111111111111"
 		if self.stage_id.name != False and self.last_stage_id.name != False:
 			template = self.env.ref('ci_hr.example_email_template')
+			
 			self.env['mail.template'].browse(template.id).send_mail(self.id, force_send=True)
 		
 		if not stage_id:

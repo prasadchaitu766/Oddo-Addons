@@ -47,6 +47,7 @@
             <xpath expr="//form/header/button[1]" position="replace">
 
               <button name="employee_creation" string="Create-Employee" type="object" attrs="{'invisible':['|',('state','=','employee'),('state','=','terminate')]}"/>
+              <button name="" type="object"  string="Print"/>
               
              <field name="state" readonly="1" statusbar_visible="draft,employee,refuse,terminate" widget="statusbar"/>
             </xpath>
