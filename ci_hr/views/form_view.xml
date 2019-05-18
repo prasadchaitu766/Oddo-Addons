@@ -127,8 +127,9 @@
             	<xpath expr="//form/sheet" position="before">
             		<header>
             			
-            			<button name="terminate_employee" type="object" string="Terminate" attrs="{'invisible': [('state','in',('employee','draft','terminated'))]}"/>
-            			<button name="employee_resign" type="object" string="Resign" attrs="{'invisible':['|',('state','=','resign'),('state','=','terminate'),('state','=','draft')]}"/>
+            			<button name="terminate_employee" type="object" string="Terminate" attrs="{'invisible': [('state','in',('resign','draft','terminate'))]}"/>
+            			
+            			<button name="employee_resign" type="object" string="Resign" attrs="{'invisible':[('state','in',('resign','terminate','draft'))]}"/> 
 
             			<field name="state" readonly="1" statusbar_visible="draft,terminate,resign,cancel" widget="statusbar"/>
 
@@ -168,6 +169,17 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('state', '=', 'terminate')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Approved Resignation
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="employee_resignation">
+            <field name="name">employee-resignation</field>
+            <field name="res_model">hr.applicant</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'resign')]</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Approved Resignation
                 </p>
@@ -245,6 +257,13 @@
 		parent="hr_menu_list"
 		action="employee_terminated"
 		sequence="3"/>
+		/>
+		<menuitem 
+		id="registration555" 
+		name="Resign-Employees"
+		parent="hr_menu_list"
+		action="employee_resignation"
+		sequence="4"/>
 		/>
 
 

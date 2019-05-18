@@ -29,6 +29,8 @@
         'views/templates.xml',
         'views/form_view.xml',
         'views/template.xml',
+        'views/resign.xml',
+        'views/hr_approve_template.xml',
        
     ],
     # only loaded in demonstration mode

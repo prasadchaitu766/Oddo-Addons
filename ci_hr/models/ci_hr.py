@@ -10,6 +10,7 @@ class hr_recruitment_test_inheritence(models.Model):
 
 	date=fields.Date(string="Interview-Date")
 	interviewr_name=fields.Char(string="Interviewer_name")
+	joining=fields.Date(string="Joining-Date")
 
 	@api.multi
 	def daily_report_employee(self):
@@ -32,8 +33,8 @@ class hr_recruitment_test_inheritence(models.Model):
 			self.name = 'Application for the post of '+str(self.job_id.name)
 			
 	def _onchange_stage_id_internal(self, stage_id):
-		print self.stage_id.name,"0000000000000000000000000000000000"
-		print self.last_stage_id.name,"111111111111111111111111111111111111111"
+		# print self.stage_id.name,"0000000000000000000000000000000000"
+		# print self.last_stage_id.name,"111111111111111111111111111111111111111"
 		if self.stage_id.name != False and self.last_stage_id.name != False:
 			template = self.env.ref('ci_hr.example_email_template')
 			self.env['mail.template'].browse(template.id).send_mail(self.id, force_send=True)

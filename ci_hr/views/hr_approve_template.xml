@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+<!-- <record id="hr_approval_mail" model="mail.template">
+            <field name="name">Hr-Approvals-Mail</field> -->
+            
+            <!-- <field name="email_from"><![CDATA[${object.employee_id.name} <${object.employee_id.work_email}>]]></field> -->
+            <!-- <field name="email_from">${}</field>
+            <field name="email_to">${object.name.email_from|safe}</field>
+            <field name="subject">Hr- Resignation Reques Accepted</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="built_in" eval="True"/>
+            <field name="body_html"><![CDATA[
+                <p>Dear ${object.name.name},</p>
+                <p>Your Resignation request accepted</p>
+                <hr/>
+            
+                
+                
+            ]]>
+            </field>
+        </record> -->
+
+        <record id="test_email_send" model="mail.template">
+            <field name="name">Resignation Request Mail</field>
+            <field name="email_from">${}</field>
+            <field name="email_to">${object.name.email_from|safe}</field>
+            <field name="subject">Resignation Request Submitted</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="built_in" eval="True"/>
+            <field name="body_html"><![CDATA[
+                <p>Dear </p>
+                <p> have submitted resignation request.</p>
+                <hr/>
+            
+                
+                
+            ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -14,6 +14,10 @@
           <field name="partner_id" invisible="1"/>
           <!-- <field name ="test"/> -->
         </field>
+
+        <field name="type_id" position="after">
+          <field name="joining"/>
+        </field>
         <xpath expr="//form/sheet/div/button" position="after">
          
                     <button name="daily_report_employee" class="oe_stat_button" icon="fa-file" type="object" help="Schedule interview with this applicant">

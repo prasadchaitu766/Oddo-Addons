@@ -1,0 +1,126 @@
+<odoo>
+	<data>
+		<record id="resign_view_tree" model="ir.ui.view">
+		<field name="name">Resign-View-Tree</field>
+		<field name="model">hr.resign</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="joining_date"/>
+				<field name="releaving_date"/>
+				<field name="state"/>
+
+			</tree>
+		</field>
+		</record>
+		<record id="resign_view_form" model="ir.ui.view">
+			<field name="name">Resign-View-Form</field>
+			<field name="model">hr.resign</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button name="confirm_resign" type="object" string="Confirm" attrs="{'invisible':[('state','in',('confirm','hr-approve','ceo_approve','employee-closed'))]}"/>
+						<button name="ceo_state_method" type="object" string="Send To CEO" states="confirm"/>
+
+						<button name="reject_resign" type="object" string="Reject" states="confirm" attrs="{'invisible':[('state','in',('confirm','hr-approve','ceo_approve','employee-closed','draft'))]}" />
+
+						<button name="ceo_state_method" string="CEO-Confirm" type="object" attrs="{'invisible':[('state','in',('confirm','ceo_approve','employee-closed','draft'))]}"/>
+
+						<button name="closed_employees" string="Close-Employee" type="object" attrs="{'invisible':[('state','in',('confirm','hr-approve','employee-closed','draft'))]}"/>
+
+
+
+						<field name="state" status_visible="draft,confirm,hr-approve,employee-closed,reject,ceo_approve" widget="statusbar"/>
+						
+					</header>
+					<sheet>
+						<group>
+							<group>
+								<field name="name"/>
+								<field name="department"/>
+
+							</group>
+							<group>
+								<field name="joining_date"/>
+								<field name="releaving_date"/>
+								<field name="employee"/>
+							</group>
+							<group>
+								<field name="hr_approve_date"/>
+								<field name="ceo_approve_date"/>
+								<field name="closed_application"/>
+
+							</group>
+							<group>
+								<field name="reason"/>
+							</group>
+
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="resign_view_action" model="ir.actions.act_window">
+			<field name="name">Resign-View-Action</field>
+			<field name="res_model">hr.resign</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="employee_resign">
+            <field name="name">employee-resign</field>
+            <field name="res_model">hr.resign</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'confirm')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Approved Resignation
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="ceo_confirmation">
+            <field name="name">ceo-confirmation</field>
+            <field name="res_model">hr.resign</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'hr-approve')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Approved Resignation
+                </p>
+            </field>
+        </record>
+
+
+
+		<menuitem 
+		id="registration5555" 
+		name="Resign-Request"
+		parent="hr_menu_list"
+		action="resign_view_action"
+		sequence="5"/>
+		/>
+		<menuitem 
+            	id="hr_approvals"
+            	name="Approvals"
+            	parent="hr.menu_hr_root"
+            	sequence="1"/>
+        <menuitem 
+		id="registration55555" 
+		name="HR-Appovals for Resign-Request"
+		parent="hr_approvals"
+		action="employee_resign"
+		sequence="2"/>
+		 <menuitem 
+		id="registration555555" 
+		name="CEO Approvals"
+		parent="hr_approvals"
+		action="ceo_confirmation"
+		sequence="3"/>
+		
+            
+
+
+	</data>
+</odoo>
