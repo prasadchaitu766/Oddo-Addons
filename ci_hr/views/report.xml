@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_employee_new">
+		<t t-call="report.html_container">
+			<t t-call="report.external_layout">
+			<!-- <t t-foreach="docs" t-as="result"> -->
+            
+				<div class="page" style="font-size:14px;width:100%">
+				<div class="oe_structure"/>
+				<div class="row">  
+					<head> 
+						<style>
+							table {
+								font-family: Courier New, Times New Roman;
+								border-collapse: collapse;
+								width: 100%;
+							}
+
+							td, th {
+								border: 1px solid #000000;
+								text-align: center;
+								padding: 8px;
+							}
+						</style>
+					</head>
+					<body>
+						<h2 style="text-align:center"> Employee Details</h2>
+						<br/>
+						<table>
+							<tr style="background-color: #0e9e21;">
+								
+								<th>Employee Name</th>
+								<th>Email</th>
+								<th>Contact</th>
+								
+								<th>Qualification</th>
+								<th>Joining_Date</th>
+								<th>Department</th>
+								
+							</tr>
+							<tr t-foreach="docs" t-as="doc">
+								
+								
+								<td> 
+									<span t-if="doc.name" t-field="doc.name"/>
+								</td>
+									
+								<td>
+									<span t-if="doc.email_from" t-field="doc.email_from"/>
+								</td>
+								
+								<td>
+									<span t-if="doc.partner_mobile" t-field="doc.partner_mobile"/>
+								</td>
+								
+								<td>
+									<span t-if="doc.type_id" t-field="doc.type_id"/>
+								</td>
+									
+								<td>
+									<span t-if="doc.joining" t-field="doc.joining"/>
+								</td>
+								
+								<td>
+									<span t-if="doc.department_id" t-field="doc.department_id"/>
+								</td>
+								
+							</tr>
+						</table>
+					</body>
+				</div>
+			</div>
+		</t>
+			
+		</t>
+	
+	</template>
+</odoo>
+
+							

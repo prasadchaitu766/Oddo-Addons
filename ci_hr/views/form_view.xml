@@ -129,19 +129,32 @@
             			
             			<button name="terminate_employee" type="object" string="Terminate" attrs="{'invisible': [('state','in',('resign','draft','terminate'))]}"/>
             			
-            			<button name="employee_resign" type="object" string="Resign" attrs="{'invisible':[('state','in',('resign','terminate','draft'))]}"/> 
+            			<button name="employee_resign" type="object" string="Resign" attrs="{'invisible':[('state','in',('resign','terminate','draft'))]}"/>
+            			 <div class="oe_button_box" name="button_box">
+
+                       
+                    </div>
 
             			<field name="state" readonly="1" statusbar_visible="draft,terminate,resign,cancel" widget="statusbar"/>
 
             		</header>
 
             		
+           
+            			</xpath>
+            			<xpath expr="//form/sheet/div/button" position="before">
+         
+                    <button name="send_msg" class="oe_stat_button" icon="fa-whatsapp" type="object">
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_text">Whatsapp</span>
+                         </div>
+                    </button>
+                  
+                </xpath>
             			
-            			
-
 
             		
-            	</xpath>
+            
             	
             </field>
         </record>
@@ -185,6 +198,43 @@
                 </p>
             </field>
         </record>
+        
+        <record id="employee_list_view_tree" model="ir.ui.view">
+        	<field name="name">Employee-List-View_Tree</field>
+        	<field name="model">hr.employees</field>
+        	<field name="arch" type="xml">
+        		<form>
+        			<group>
+        				<group>
+        				<field name="employee_id"/>
+        				</group>
+        			</group>
+        			<footer>
+        				<button name="generate_employee_list" string="Employee-List" type="object"  class="btn-primary"/>
+        				<button name="cancel" string="Cancel" type="object" special="cancel"/>
+        			</footer>
+
+        		</form>
+        	</field>
+        
+        </record>
+        <record id="employee_list_view_action" model="ir.actions.act_window">
+        	<field name="name">Employee-List-View-Action</field>
+        	<field name="res_model">hr.employees</field>
+        	<field name="view_mode">form</field>
+        	<field name="target">new</field>
+
+
+        </record>
+        <report 
+        id="employee_advanced list" 
+        model="hr.applicant" 
+        string="employeelist"
+        report_type="qweb-pdf"
+        name="ci_hr.report_employee_new" 
+        file="ci_hr.report_employee_new"
+        attachment_use="True"
+      />
 
 
        <!--  <menuitem id="employee_resignation_approved" parent="ci_hr.hr_approve_menu_main" name="De-Active-Employee"
@@ -264,6 +314,13 @@
 		parent="hr_menu_list"
 		action="employee_resignation"
 		sequence="4"/>
+		/>
+		<menuitem 
+		id="registration66666" 
+		name="Employee-List"
+		parent="hr_menu_list"
+		action="employee_list_view_action"
+		sequence="5"/>
 		/>
 
 

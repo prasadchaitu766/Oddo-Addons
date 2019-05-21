@@ -3,17 +3,26 @@
     <data>
         <record id="whatsapp_send_msg_wizard" model="ir.ui.view">
             <field name="name">whatsapp.message.wizard.form</field>
-            <field name="model">whatsapp.message.wizard</field>
+            <field name="model">test.test</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <form string="Whatsapp Message">
                     <group>
-                        <field name="user_id"/>
+                    <group>
+                        
+                        <field name="user_id" widget="selection"/>
                         <field name="mobile"/>
+                    </group>
+                    <group>
+                        <field name="image" widget="image"/>
+                        
                     </group>
                     <group>
                         <field name="message"/>
                     </group>
+
+                    </group>
+
                     <footer>
                         <button name="send_message" string="Send" type="object"/>
                         <button name="cancel" string="Cancel" special="cancel"/>
@@ -21,5 +30,17 @@
                 </form>
             </field>
         </record>
+
+
+
+
+        <!-- <record id="whatsapp_send_msg_wizard_inherit" model="ir.ui.view">
+            <field name="name">message</field>
+            <field name="model">whatsapp.message.wizard</field>
+            <field name="inherit_id" ref="ci_hr.whatsapp_send_msg_wizard"/>
+            <field name="message" position="after">
+                <field name="testing"/>
+            </field>
+        </record> -->
     </data>
 </odoo>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "ci_hr",
+    'name': "whats_app",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -20,25 +20,16 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','hr_recruitment','mail'],
+    'depends': ['base'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/form_view.xml',
-        'views/template.xml',
-        'views/resign.xml',
-        'views/hr_approve_template.xml',
-       
-        'wizard/wizard.xml',
-        'views/report.xml',
-       
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
-        ''
     ],
 }

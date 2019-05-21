@@ -51,18 +51,21 @@
               
              <field name="state" readonly="1" statusbar_visible="draft,employee,refuse,terminate" widget="statusbar"/>
             </xpath>
-            <xpath expr="//form/header/button[2]" position="replace">
-              <button name="employee_refue" string="Refuse-Employee" type="object" attrs="{'invisible':['|',('state','=','employee'),('state','=','terminate')]}"/>
+
+            <xpath expr="//form/header" position="inside">
+              <button name="employee_refue" string="Refuse-Employee" type="object" attrs="{'invisible':[('state','in',('employee','terminate','draft'))]}"/>
+
                <field name="state" readonly="1" statusbar_visible="draft,employee,refuse,terminate" widget="statusbar"/>
              
               
               
               <!-- <field name="state_p" readonly="1" statusbar_visible="draft,employee,refuse" widget="statusbar"/> -->
             </xpath>
-            <!-- <xpath expr="//form/header" position="replace">
-              <field name="stage_id" invisible="1"/>
+
+            <xpath expr="//form/header/button[2]" position="replace">
+              <button name="archive_applicant" attrs="{'invisible':[('state','in',('draft','terminate','employee'))]}"/>
             </xpath>
-         -->
+        
 
       </field>
       <!--  <div class="oe_button_box" name="button_box">

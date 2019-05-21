@@ -93,6 +93,17 @@ class Hr_Applicant_inherited(models.Model):
 	def employee_resign(self):
 		self.write({'state':'resign'})
 
+	# @api.multi
+	# def send_msg(self):
+	# 	return {'type': 'ir.actions.act_window',
+ #                'name': _('Whatsapp Message'),
+ #                'res_model': 'test.test',
+ #                'target': 'new',
+ #                'view_mode': 'form',
+ #                'view_type': 'form',
+ #                'context': {'default_user_id': self.id},
+ #                }
+
 
 
 
